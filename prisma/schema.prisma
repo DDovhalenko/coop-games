@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum GroupRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum GameStatus {
+  PLANNED
+  PLAYING
+  COMPLETED
+  DROPPED
+}
+
+model User {
+  id                 Int      @id @default(autoincrement())
+  nickname           String   @unique
+  createdAt          DateTime @default(now())
+
+  oauthAccounts  OAuthAccount[]
+  memberships    GroupMember[]
+  createdGroups  Group[]      @relation("GroupCreator")
+  addedGroupGames GroupGame[] @relation("GameAdder")
+}
+
+model OAuthAccount {
+  id                Int      @id @default(autoincrement())
+  userId            Int
+  provider          String
+  providerAccountId String
+  createdAt         DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Group {
+  id          Int      @id @default(autoincrement())
+  name        String
+  createdById Int?
+  createdAt   DateTime @default(now())
+
+  createdBy User?         @relation("GroupCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  members   GroupMember[]
+  games     GroupGame[]
+}
+
+model GroupMember {
+  id       Int       @id @default(autoincrement())
+  groupId  Int
+  userId   Int
+  role     GroupRole @default(MEMBER)
+  joinedAt DateTime  @default(now())
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  gameStatuses GroupGameMember[]
+
+  @@unique([groupId, userId])
+  @@index([userId])
+}
+
+model Game {
+  id         Int      @id @default(autoincrement())
+  title      String
+  steamAppId Int?     @unique
+  coverUrl   String?
+  createdAt  DateTime @default(now())
+
+  groupGames GroupGame[]
+}
+
+model GroupGame {
+  id        Int      @id @default(autoincrement())
+  groupId   Int
+  gameId    Int
+  addedById Int?
+  addedAt   DateTime @default(now())
+
+  group   Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  game    Game  @relation(fields: [gameId], references: [id], onDelete: Restrict)
+  addedBy User? @relation("GameAdder", fields: [addedById], references: [id], onDelete: SetNull)
+
+  memberStatuses GroupGameMember[]
+
+  @@unique([groupId, gameId])
+  @@index([gameId])
+}
+
+model GroupGameMember {
+  id             Int        @id @default(autoincrement())
+  groupGameId    Int
+  groupMemberId  Int
+  interestScore  Int?
+  gameRating     Int?
+  status         GameStatus @default(PLANNED)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  groupGame   GroupGame   @relation(fields: [groupGameId], references: [id], onDelete: Cascade)
+  groupMember GroupMember @relation(fields: [groupMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([groupGameId, groupMemberId])
+  @@index([groupMemberId])
+}
