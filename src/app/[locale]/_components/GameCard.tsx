@@ -1,13 +1,17 @@
 export type GameCardData = {
   id: number;
   title: string;
-  players: string;
-  status: string;
+  players: "two" | "twoToFour" | "oneToFour";
+  status: "wantToPlay" | "planned" | "playing";
   rating: string;
 };
 
 type GameCardProps = {
-  game: GameCardData;
+  game: Omit<GameCardData, "players" | "status" | "rating"> & {
+    players: string;
+    status: string;
+    rating: string;
+  };
 };
 
 export function GameCard({ game }: GameCardProps) {
@@ -24,7 +28,7 @@ export function GameCard({ game }: GameCardProps) {
         <span className="rounded-full bg-violet-500/15 px-3 py-1 text-xs text-violet-300">
           {game.status}
         </span>
-        <span className="text-sm text-zinc-400">Оценка: {game.rating}</span>
+        <span className="text-sm text-zinc-400">{game.rating}</span>
       </div>
     </article>
   );
