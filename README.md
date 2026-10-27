@@ -1,36 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# coop-games
 
-## Getting Started
+Веб-приложение для планирования совместных игр. Сейчас реализован вход через Google, создание профиля с уникальным никнеймом и базовый экран библиотеки.
 
-First, run the development server:
+## Локальный запуск
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Установите зависимости: `npm install`.
+2. Скопируйте `.env.example` в `.env` и заполните значения.
+3. Создайте `AUTH_SECRET` командой `npx auth secret`.
+4. В Google Cloud Console создайте OAuth Client ID типа Web application и добавьте URI перенаправления `http://localhost:3000/api/auth/callback/google`.
+5. Запустите приложение: `npm run dev`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`AUTH_GOOGLE_ID` и `AUTH_GOOGLE_SECRET` — учётные данные OAuth-клиента Google. `DATABASE_URL` используется приложением для PostgreSQL в Neon; `DIRECT_URL` нужен Prisma CLI согласно `prisma7.config.ts`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Для Google запрашивается только OpenID scope. Приложение использует стабильный Google ID, не записывает email и не передаёт поля профиля Google в сессию. При первом входе пользователь выбирает никнейм; записи `User` и `OAuthAccount` создаются после успешного выбора.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Production
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+В настройках OAuth-клиента добавьте production домен и callback URI `https://<домен>/api/auth/callback/google`. Задайте те же переменные окружения на хостинге.
