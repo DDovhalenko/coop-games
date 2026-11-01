@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "Coop-games: Slop Schedule",
+    "description": "Плануйте свої слоп-проходження разом із друзями — обирайте, у що грати, і позначайте, що вже пройшли."
+  },
+  "notFound": {
+    "title": "Сторінку не знайдено",
+    "description": "Не вдалося знайти сторінку, яку ви шукаєте.",
+    "homeLink": "На головну"
+  },
+  "common": {
+    "brand": "БІБЛІОТЕКА КООПЕРАТИВНИХ ІГОР",
+    "signOut": "Вийти",
+    "language": "Мова",
+    "loadingProfile": "Завантажуємо профіль…",
+    "footer": "Бібліотека кооперативних ігор · Перша версія"
+  },
+  "auth": {
+    "signInHeading": "Увійдіть, щоб продовжити",
+    "signInDescription": "Використовуйте обліковий запис Google. Дані профілю ми не зберігаємо.",
+    "googleButton": "Продовжити з Google",
+    "firstSignIn": "ПЕРШИЙ ВХІД",
+    "createNicknameHeading": "Створіть нікнейм",
+    "nicknameDescription": "Він відображатиметься у групах. Електронна пошта Google не зберігається у профілі.",
+    "profileNameLabel": "Ім’я профілю",
+    "nicknamePlaceholder": "Наприклад, Dragon",
+    "createProfileButton": "Створити профіль",
+    "savingProfileButton": "Зберігаємо…"
+  },
+  "errors": {
+    "sessionMissing": "Сесію входу не знайдено. Увійдіть через Google ще раз.",
+    "nicknameLength": "Укажіть нікнейм завдовжки від 1 до 32 символів.",
+    "nicknameTaken": "Цей нікнейм уже зайнятий. Виберіть інший."
+  },
+  "games": {
+    "pageHeading": "Наша ігрова бібліотека",
+    "intro": "Збираємо ігри та обираємо, у що грати разом.",
+    "sectionHeading": "Ігри групи",
+    "signedInAs": "Ви увійшли як {nickname}",
+    "totalCount": "{count, plural, one {# гра} few {# гри} many {# ігор} other {# гри}}",
+    "addGame": "+ Додати гру",
+    "rating": "Оцінка: {rating}",
+    "players": {
+      "two": "2 гравці",
+      "twoToFour": "2–4 гравці",
+      "oneToFour": "1–4 гравці"
+    },
+    "statuses": {
+      "wantToPlay": "Хочемо пройти",
+      "planned": "У планах",
+      "playing": "Граємо"
+    }
+  }
+}

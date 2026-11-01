@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "Coop-games: Slop Schedule",
+    "description": "Plan your slop playthroughs with friends—choose what to play and mark what you’ve already completed."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "We couldn't find the page you're looking for.",
+    "homeLink": "Back to home"
+  },
+  "common": {
+    "brand": "CO-OP GAME LIBRARY",
+    "signOut": "Sign out",
+    "language": "Language",
+    "loadingProfile": "Loading your profile…",
+    "footer": "Co-op game library · First version"
+  },
+  "auth": {
+    "signInHeading": "Sign in to continue",
+    "signInDescription": "Use your Google account. We don't store profile data.",
+    "googleButton": "Continue with Google",
+    "firstSignIn": "FIRST SIGN-IN",
+    "createNicknameHeading": "Create your nickname",
+    "nicknameDescription": "It will be shown to your groups. Your Google email is not stored in your profile.",
+    "profileNameLabel": "Profile name",
+    "nicknamePlaceholder": "For example, Dragon",
+    "createProfileButton": "Create profile",
+    "savingProfileButton": "Saving…"
+  },
+  "errors": {
+    "sessionMissing": "Your sign-in session was not found. Sign in with Google again.",
+    "nicknameLength": "Enter a nickname between 1 and 32 characters.",
+    "nicknameTaken": "That nickname is already taken. Choose another one."
+  },
+  "games": {
+    "pageHeading": "Our game library",
+    "intro": "Collect games and decide what to play together.",
+    "sectionHeading": "Group games",
+    "signedInAs": "Signed in as {nickname}",
+    "totalCount": "{count, plural, one {# game} other {# games}}",
+    "addGame": "+ Add a game",
+    "rating": "Rating: {rating}",
+    "players": {
+      "two": "2 players",
+      "twoToFour": "2–4 players",
+      "oneToFour": "1–4 players"
+    },
+    "statuses": {
+      "wantToPlay": "Want to play",
+      "planned": "Planned",
+      "playing": "Playing"
+    }
+  }
+}

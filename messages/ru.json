@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "Coop-games: Slop Schedule",
+    "description": "Планируйте свои слоп-прохождения вместе с друзьями — выбирайте, во что играть, и отмечайте, что уже прошли."
+  },
+  "notFound": {
+    "title": "Страница не найдена",
+    "description": "Не удалось найти страницу, которую вы ищете.",
+    "homeLink": "На главную"
+  },
+  "common": {
+    "brand": "БИБЛИОТЕКА КООПЕРАТИВНЫХ ИГР",
+    "signOut": "Выйти",
+    "language": "Язык",
+    "loadingProfile": "Загружаем профиль…",
+    "footer": "Библиотека кооперативных игр · Первая версия"
+  },
+  "auth": {
+    "signInHeading": "Войдите, чтобы продолжить",
+    "signInDescription": "Используйте аккаунт Google. Данные профиля мы не сохраняем.",
+    "googleButton": "Продолжить с Google",
+    "firstSignIn": "ПЕРВЫЙ ВХОД",
+    "createNicknameHeading": "Создайте никнейм",
+    "nicknameDescription": "Он будет отображаться в группах. Почта Google в профиль не записывается.",
+    "profileNameLabel": "Имя профиля",
+    "nicknamePlaceholder": "Например, Dragon",
+    "createProfileButton": "Создать профиль",
+    "savingProfileButton": "Сохраняем…"
+  },
+  "errors": {
+    "sessionMissing": "Сессия входа не найдена. Войдите через Google ещё раз.",
+    "nicknameLength": "Укажите никнейм длиной от 1 до 32 символов.",
+    "nicknameTaken": "Этот никнейм уже занят. Выберите другой."
+  },
+  "games": {
+    "pageHeading": "Наша игровая библиотека",
+    "intro": "Собираем игры и выбираем, во что играть вместе.",
+    "sectionHeading": "Игры группы",
+    "signedInAs": "Вы вошли как {nickname}",
+    "totalCount": "{count, plural, one {# игра} few {# игры} many {# игр} other {# игры}}",
+    "addGame": "+ Добавить игру",
+    "rating": "Оценка: {rating}",
+    "players": {
+      "two": "2 игрока",
+      "twoToFour": "2–4 игрока",
+      "oneToFour": "1–4 игрока"
+    },
+    "statuses": {
+      "wantToPlay": "Хотим пройти",
+      "planned": "В планах",
+      "playing": "Проходим"
+    }
+  }
+}

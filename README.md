@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coop-games: Slop Schedule
 
-## Getting Started
+Coop-games is a web app in development for friends who want to plan co-op playthroughs together. Its goal is to give each group a shared game plan where members can compare what they want to play and track their individual progress.
 
-First, run the development server:
+The project is currently at an early stage. Google sign-in, nickname-based profiles, multilingual UI, and a starter game-library screen are in place. Group management and live game-catalog features are part of the product direction and are still being built.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What the project is for
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Co-op games often get lost in chats and scattered lists. Coop-games is designed to give a friend group one shared place to:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- collect games the group might play;
+- compare each member’s interest and game rating;
+- track individual play status;
+- preserve a history of completed group playthroughs.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app is intended for small groups of friends. A player’s status is personal, so one member can mark a game complete while another is still playing or has not started.
 
-## Learn More
+## Languages and sign-in
 
-To learn more about Next.js, take a look at the following resources:
+The interface is available in English, Russian, and Ukrainian. English is the default. Users sign in with Google and choose a unique nickname for their profile. The app does not store Google email addresses.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technology
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js App Router, React, and TypeScript
+- Tailwind CSS
+- Auth.js with Google OAuth and JWT sessions
+- PostgreSQL on Neon, accessed through Prisma and the PostgreSQL adapter
+- `next-intl` for localized routes and messages
 
-## Deploy on Vercel
+The Prisma schema includes users, OAuth identities, groups, group membership and roles, a shared game catalog, games added to groups, and per-member ratings and play statuses. The current game-library screen uses sample data; group workflows, persistent game management, Steam metadata, and playthrough history are not implemented yet.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Run locally
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Install dependencies: `npm install`.
+2. Copy `.env.example` to `.env` and set `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `DATABASE_URL`, and `DIRECT_URL`.
+3. Add `http://localhost:3000` as an authorized JavaScript origin and `http://localhost:3000/api/auth/callback/google` as an authorized redirect URI in your Google OAuth client.
+4. Apply database migrations: `npx prisma migrate dev`.
+5. Start the app: `npm run dev`, then open [http://localhost:3000](http://localhost:3000).
+
+Generate an Auth.js secret with `npx auth secret`. The `.env` file is ignored by Git. For local development, Next.js can also read `.env.development.local`; Prisma CLI reads `.env` through the project’s Prisma config.
