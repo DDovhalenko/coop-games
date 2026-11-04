@@ -1,12 +1,21 @@
 import { useTranslations } from "next-intl";
 import type { AppLocale } from "../../../i18n/routing";
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import { SignOutButton } from "./SignOutButton";
-import { GameCard, type GameCardData } from "./GameCard";
+import { LanguageSwitcher } from "../../../components/LanguageSwitcher";
+import { SignOutButton } from "../../../components/SignOutButton";
+import { GameCard, type GameCardData } from "../../../components/GameCard";
+import { CreateGroupBlock } from "./CreateGroupBlock";
+import { Button } from "../../../components/Button";
+import { GroupNameEditor } from "../../../components/dialogs/GroupNameEditor";
+
+type GroupSummary = {
+  id: number;
+  name: string;
+};
 
 type GameLibraryProps = {
   locale: AppLocale;
   nickname: string;
+  group: GroupSummary | null;
 };
 
 const games: GameCardData[] = [
@@ -33,7 +42,7 @@ const games: GameCardData[] = [
   },
 ];
 
-export function GameLibrary({ locale, nickname }: GameLibraryProps) {
+export function GameLibrary({ locale, nickname, group }: GameLibraryProps) {
   const t = useTranslations("games");
   const metadata = useTranslations("metadata");
   const common = useTranslations("common");
@@ -70,40 +79,53 @@ export function GameLibrary({ locale, nickname }: GameLibraryProps) {
             <SignOutButton
               locale={locale}
               label={common("signOut")}
-              className="text-sm text-zinc-400 underline-offset-4 hover:text-white hover:underline"
+              className="text-sm"
             />
           </div>
         </header>
 
-        <section className="mb-8 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h2 className="text-xl font-semibold">{t("sectionHeading")}</h2>
-            <p className="mt-1 text-sm text-zinc-400">
-              {t("totalCount", { count: games.length })}
-            </p>
-          </div>
-          <button
-            type="button"
-            className="rounded-xl bg-violet-600 px-5 py-3 font-medium transition hover:bg-violet-500"
-          >
-            {t("addGame")}
-          </button>
-        </section>
+        {group !== null ? (
+          <>
+            <section className="mb-8 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-xl font-semibold">{group.name}</h2>
+                  <GroupNameEditor
+                    locale={locale}
+                    groupId={group.id}
+                    groupName={group.name}
+                  />
+                </div>
+                <p className="mt-1 text-sm text-zinc-400">
+                  {t("totalCount", { count: games.length })}
+                </p>
+              </div>
+              <Button
+                type="button"
+                size="small"
+              >
+                {t("addGame")}
+              </Button>
+            </section>
 
-        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {games.map((game) => (
-            <GameCard
-              key={game.id}
-              game={{
-                id: game.id,
-                title: game.title,
-                players: playerLabels[game.players],
-                status: statusLabels[game.status],
-                rating: t("rating", { rating: game.rating }),
-              }}
-            />
-          ))}
-        </section>
+            <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {games.map((game) => (
+                <GameCard
+                  key={game.id}
+                  game={{
+                    id: game.id,
+                    title: game.title,
+                    players: playerLabels[game.players],
+                    status: statusLabels[game.status],
+                    rating: t("rating", { rating: game.rating }),
+                  }}
+                />
+              ))}
+            </section>
+          </>
+        ) : (
+          <CreateGroupBlock locale={locale} />
+        )}
 
         <footer className="mt-12 border-t border-zinc-800 pt-5 text-sm text-zinc-500">
           {common("footer")}

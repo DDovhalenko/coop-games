@@ -23,6 +23,7 @@
     "createNicknameHeading": "Создайте никнейм",
     "nicknameDescription": "Он будет отображаться в группах. Почта Google в профиль не записывается.",
     "profileNameLabel": "Имя профиля",
+    "profileNameRequired": "Введите имя профиля.",
     "nicknamePlaceholder": "Например, Dragon",
     "createProfileButton": "Создать профиль",
     "savingProfileButton": "Сохраняем…"
@@ -30,12 +31,13 @@
   "errors": {
     "sessionMissing": "Сессия входа не найдена. Войдите через Google ещё раз.",
     "nicknameLength": "Укажите никнейм длиной от 1 до 32 символов.",
-    "nicknameTaken": "Этот никнейм уже занят. Выберите другой."
+    "nicknameTaken": "Этот никнейм уже занят. Выберите другой.",
+    "groupNameTooLong": "Название группы должно содержать не больше 80 символов.",
+    "groupAccessDenied": "У вас нет прав для изменения этой группы."
   },
   "games": {
     "pageHeading": "Наша игровая библиотека",
     "intro": "Собираем игры и выбираем, во что играть вместе.",
-    "sectionHeading": "Игры группы",
     "signedInAs": "Вы вошли как {nickname}",
     "totalCount": "{count, plural, one {# игра} few {# игры} many {# игр} other {# игры}}",
     "addGame": "+ Добавить игру",
@@ -50,5 +52,20 @@
       "planned": "В планах",
       "playing": "Проходим"
     }
+  },
+  "groups": {
+    "createFirstHeading": "Создайте первую группу",
+    "createFirstDescription": "Создайте группу, чтобы собрать общий список игр и планировать совместные прохождения.",
+    "editGroupName": "Изменить название группы",
+    "editGroupHeading": "Изменить название группы",
+    "editGroupDescription": "Новое название будет видно участникам группы.",
+    "groupNameLabel": "Название группы",
+    "groupNameRequired": "Введите название группы.",
+    "groupNamePlaceholder": "Например, Кооп по пятницам",
+    "createGroupButton": "Создать группу",
+    "creatingGroupButton": "Создаём…",
+    "updateGroupButton": "Изменить",
+    "savingGroupNameButton": "Сохраняем…",
+    "cancelGroupEdit": "Отмена"
   }
 }

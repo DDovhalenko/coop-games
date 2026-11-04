@@ -23,6 +23,7 @@
     "createNicknameHeading": "Створіть нікнейм",
     "nicknameDescription": "Він відображатиметься у групах. Електронна пошта Google не зберігається у профілі.",
     "profileNameLabel": "Ім’я профілю",
+    "profileNameRequired": "Введіть ім’я профілю.",
     "nicknamePlaceholder": "Наприклад, Dragon",
     "createProfileButton": "Створити профіль",
     "savingProfileButton": "Зберігаємо…"
@@ -30,12 +31,13 @@
   "errors": {
     "sessionMissing": "Сесію входу не знайдено. Увійдіть через Google ще раз.",
     "nicknameLength": "Укажіть нікнейм завдовжки від 1 до 32 символів.",
-    "nicknameTaken": "Цей нікнейм уже зайнятий. Виберіть інший."
+    "nicknameTaken": "Цей нікнейм уже зайнятий. Виберіть інший.",
+    "groupNameTooLong": "Назва групи має містити не більше ніж 80 символів.",
+    "groupAccessDenied": "У вас немає прав змінювати цю групу."
   },
   "games": {
     "pageHeading": "Наша ігрова бібліотека",
     "intro": "Збираємо ігри та обираємо, у що грати разом.",
-    "sectionHeading": "Ігри групи",
     "signedInAs": "Ви увійшли як {nickname}",
     "totalCount": "{count, plural, one {# гра} few {# гри} many {# ігор} other {# гри}}",
     "addGame": "+ Додати гру",
@@ -50,5 +52,20 @@
       "planned": "У планах",
       "playing": "Граємо"
     }
+  },
+  "groups": {
+    "createFirstHeading": "Створіть першу групу",
+    "createFirstDescription": "Створіть групу, щоб зібрати спільний список ігор і планувати кооперативні проходження.",
+    "editGroupName": "Змінити назву групи",
+    "editGroupHeading": "Змінити назву групи",
+    "editGroupDescription": "Нова назва буде видна учасникам групи.",
+    "groupNameLabel": "Назва групи",
+    "groupNameRequired": "Введіть назву групи.",
+    "groupNamePlaceholder": "Наприклад, Кооп щоп’ятниці",
+    "createGroupButton": "Створити групу",
+    "creatingGroupButton": "Створюємо…",
+    "updateGroupButton": "Змінити",
+    "savingGroupNameButton": "Зберігаємо…",
+    "cancelGroupEdit": "Скасувати"
   }
 }

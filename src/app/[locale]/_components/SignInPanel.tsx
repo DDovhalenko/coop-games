@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import type { AppLocale } from "../../../i18n/routing";
 import { startGoogleSignIn } from "../../actions";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { LanguageSwitcher } from "../../../components/LanguageSwitcher";
+import { Button } from "../../../components/Button";
 
 type SignInPanelProps = {
   locale: AppLocale;
@@ -28,9 +29,9 @@ export function SignInPanel({ locale }: SignInPanelProps) {
           {t("signInDescription")}
         </p>
         <form action={signInAction} className="mt-6">
-          <button className="w-full cursor-pointer rounded-xl bg-white px-5 py-3 font-semibold text-zinc-900 transition hover:bg-zinc-200">
+          <Button type="submit" fullWidth>
             {t("googleButton")}
-          </button>
+          </Button>
         </form>
       </section>
     </main>

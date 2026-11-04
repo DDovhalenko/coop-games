@@ -1,8 +1,8 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import type { AppLocale } from "../../../i18n/routing";
-import { Link, useRouter } from "../../../i18n/navigation";
+import type { AppLocale } from "../i18n/routing";
+import { Link, useRouter } from "../i18n/navigation";
 
 const locales: { code: AppLocale; label: string }[] = [
   { code: "en", label: "English" },

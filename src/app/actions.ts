@@ -16,11 +16,6 @@ export async function endSession(requestedLocale: string) {
   await signOut({ redirectTo: `/${locale}` });
 }
 
-export async function refreshNicknameSession() {
-  // jwt() ignores client-provided fields and reads the nickname from Prisma.
-  await unstable_update({});
-}
-
 export type NicknameErrorCode =
   | "sessionMissing"
   | "nicknameLength"
@@ -89,8 +84,109 @@ export async function saveNickname(
     }
   }
 
-  // Persist the new DB-backed nickname claim before redirecting.
+  // Update the JWT with the internal user ID created or found above.
   await unstable_update({});
+
+  redirect(`/${locale}`);
+}
+
+export type CreateGroupErrorCode = "sessionMissing" | "groupNameTooLong";
+
+export type CreateGroupState = { error?: CreateGroupErrorCode };
+
+export async function createGroup(
+  requestedLocale: string,
+  _previousState: CreateGroupState,
+  formData: FormData,
+): Promise<CreateGroupState> {
+  const locale = isAppLocale(requestedLocale) ? requestedLocale : "en";
+  const session = await auth();
+  const userId = session?.userId;
+
+  if (typeof userId !== "number") {
+    return { error: "sessionMissing" };
+  }
+
+  const name = String(formData.get("name") ?? "").trim();
+  if (!name) {
+    return {};
+  }
+  if (name.length > 80) {
+    return { error: "groupNameTooLong" };
+  }
+
+  await prisma.$transaction(async (transaction) => {
+    const group = await transaction.group.create({
+      data: {
+        name,
+        createdById: userId,
+      },
+      select: { id: true },
+    });
+
+    await transaction.groupMember.create({
+      data: {
+        groupId: group.id,
+        userId,
+        role: "ADMIN",
+      },
+    });
+  });
+
+  redirect(`/${locale}`);
+}
+
+export type UpdateGroupNameErrorCode =
+  | "sessionMissing"
+  | "groupNameRequired"
+  | "groupNameTooLong"
+  | "groupAccessDenied";
+
+export type UpdateGroupNameState = { error?: UpdateGroupNameErrorCode };
+
+export async function updateGroupName(
+  requestedLocale: string,
+  groupId: number,
+  _previousState: UpdateGroupNameState,
+  formData: FormData,
+): Promise<UpdateGroupNameState> {
+  const locale = isAppLocale(requestedLocale) ? requestedLocale : "en";
+  const session = await auth();
+  const userId = session?.userId;
+
+  if (typeof userId !== "number") {
+    return { error: "sessionMissing" };
+  }
+
+  const name = String(formData.get("name") ?? "").trim();
+  if (!name) {
+    return { error: "groupNameRequired" };
+  }
+  if (name.length > 80) {
+    return { error: "groupNameTooLong" };
+  }
+
+  const membership = await prisma.groupMember.findUnique({
+    where: {
+      groupId_userId: {
+        groupId,
+        userId,
+      },
+    },
+    select: { role: true },
+  });
+
+  if (
+    !membership ||
+    (membership.role !== "ADMIN" && membership.role !== "OWNER")
+  ) {
+    return { error: "groupAccessDenied" };
+  }
+
+  await prisma.group.update({
+    where: { id: groupId },
+    data: { name },
+  });
 
   redirect(`/${locale}`);
 }

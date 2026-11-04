@@ -23,6 +23,7 @@
     "createNicknameHeading": "Create your nickname",
     "nicknameDescription": "It will be shown to your groups. Your Google email is not stored in your profile.",
     "profileNameLabel": "Profile name",
+    "profileNameRequired": "Enter your profile name.",
     "nicknamePlaceholder": "For example, Dragon",
     "createProfileButton": "Create profile",
     "savingProfileButton": "Saving…"
@@ -30,12 +31,13 @@
   "errors": {
     "sessionMissing": "Your sign-in session was not found. Sign in with Google again.",
     "nicknameLength": "Enter a nickname between 1 and 32 characters.",
-    "nicknameTaken": "That nickname is already taken. Choose another one."
+    "nicknameTaken": "That nickname is already taken. Choose another one.",
+    "groupNameTooLong": "Group names must be 80 characters or fewer.",
+    "groupAccessDenied": "You don't have permission to edit this group."
   },
   "games": {
     "pageHeading": "Our game library",
     "intro": "Collect games and decide what to play together.",
-    "sectionHeading": "Group games",
     "signedInAs": "Signed in as {nickname}",
     "totalCount": "{count, plural, one {# game} other {# games}}",
     "addGame": "+ Add a game",
@@ -50,5 +52,20 @@
       "planned": "Planned",
       "playing": "Playing"
     }
+  },
+  "groups": {
+    "createFirstHeading": "Start your first group",
+    "createFirstDescription": "Create a group to build a shared game list and plan your next co-op playthroughs.",
+    "editGroupName": "Edit group name",
+    "editGroupHeading": "Change group name",
+    "editGroupDescription": "The new name will be shown to group members.",
+    "groupNameLabel": "Group name",
+    "groupNameRequired": "Enter a name for your group.",
+    "groupNamePlaceholder": "For example, Friday co-op",
+    "createGroupButton": "Create a group",
+    "creatingGroupButton": "Creating…",
+    "updateGroupButton": "Update",
+    "savingGroupNameButton": "Saving…",
+    "cancelGroupEdit": "Cancel"
   }
 }

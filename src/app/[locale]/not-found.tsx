@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Link } from "../../i18n/navigation";
+import { TextLink } from "../../components/Button";
 
 export default function LocalizedNotFound() {
   const t = useTranslations("notFound");
@@ -14,12 +14,12 @@ export default function LocalizedNotFound() {
           {t("title")}
         </h1>
         <p className="mt-3 text-zinc-400">{t("description")}</p>
-        <Link
+        <TextLink
           href="/"
-          className="mt-8 inline-flex cursor-pointer rounded-xl bg-violet-600 px-5 py-3 font-semibold transition hover:bg-violet-500"
+          className="mt-8"
         >
           {t("homeLink")}
-        </Link>
+        </TextLink>
       </section>
     </main>
   );

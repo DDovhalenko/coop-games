@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import type { AppLocale } from "../../../i18n/routing";
-import { NicknameForm } from "./NicknameForm";
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import { SignOutButton } from "./SignOutButton";
+import { NicknameForm } from "../../../components/forms/NicknameForm";
+import { LanguageSwitcher } from "../../../components/LanguageSwitcher";
+import { SignOutButton } from "../../../components/SignOutButton";
 
 type NicknameSetupPanelProps = {
   locale: AppLocale;
@@ -30,7 +30,7 @@ export function NicknameSetupPanel({ locale }: NicknameSetupPanelProps) {
           <SignOutButton
             locale={locale}
             label={common("signOut")}
-            className="w-full rounded-xl px-5 py-3 text-sm text-zinc-400 transition hover:text-white"
+            className="text-sm"
           />
         </div>
       </section>

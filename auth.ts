@@ -28,9 +28,8 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
         token.sub = account.providerAccountId;
       }
 
-      // Profile claims are always loaded from our database. In particular, do
-      // not trust values supplied to unstable_update by a client.
-      if (token.sub && (trigger === "update" || !token.profileChecked)) {
+      // Only the stable internal user ID is kept in the JWT.
+      if (token.sub && (trigger === "update" || !token.userIdChecked)) {
         const linkedAccount = await prisma.oAuthAccount.findUnique({
           where: {
             provider_providerAccountId: {
@@ -38,19 +37,16 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
               providerAccountId: token.sub,
             },
           },
-          select: { user: { select: { nickname: true } } },
+          select: { userId: true },
         });
 
         if (linkedAccount) {
-          token.nickname = linkedAccount.user.nickname;
+          token.userId = linkedAccount.userId;
         } else {
-          delete token.nickname;
+          delete token.userId;
         }
 
-        token.profileChecked = true;
-        // Server Component session reads can't write refreshed cookies. Mark
-        // legacy tokens so a Server Action can persist this claim once.
-        token.nicknameNeedsRefresh = !account && trigger !== "update";
+        token.userIdChecked = true;
       }
 
       delete token.email;
@@ -62,10 +58,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
       return {
         expires: session.expires,
         ...(token.sub ? { googleAccountId: token.sub } : {}),
-        ...(typeof token.nickname === "string"
-          ? { nickname: token.nickname }
-          : {}),
-        ...(token.nicknameNeedsRefresh ? { nicknameNeedsRefresh: true } : {}),
+        ...(typeof token.userId === "number" ? { userId: token.userId } : {}),
       };
     },
   },

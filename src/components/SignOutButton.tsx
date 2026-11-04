@@ -1,5 +1,6 @@
-import { endSession } from "../../actions";
-import type { AppLocale } from "../../../i18n/routing";
+import { endSession } from "../app/actions";
+import type { AppLocale } from "../i18n/routing";
+import { TextButton } from "./Button";
 
 type SignOutButtonProps = {
   locale: AppLocale;
@@ -12,9 +13,9 @@ export function SignOutButton({ locale, label, className }: SignOutButtonProps) 
 
   return (
     <form action={signOutAction}>
-      <button className={className ?? "text-sm text-zinc-400 hover:text-white"}>
+      <TextButton type="submit" className={className ?? "text-sm"}>
         {label}
-      </button>
+      </TextButton>
     </form>
   );
 }
